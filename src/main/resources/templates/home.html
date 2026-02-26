@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Demo CRUD</title>
+</head>
+<body>
+
+<h2>Form Demo</h2>
+
+<form th:action="@{/home/save}" method="post" th:object="${demo}">
+    <input type="hidden" th:field="*{id}" />
+
+    Name:
+    <input type="text" th:field="*{name}" required />
+
+    Age:
+    <input type="number" th:field="*{age}" required />
+
+    <button type="submit">Lưu</button>
+</form>
+
+<hr>
+
+<h2>Danh sách</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="item : ${demos}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.age}"></td>
+        <td>
+            <a th:href="@{'/home/edit/' + ${item.id}}">Sửa</a>
+            <a th:href="@{'/home/delete/' + ${item.id}}">Xóa</a>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>
